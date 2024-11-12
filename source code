@@ -1,0 +1,45 @@
+#define BLYNK_PRINT Serial #include <ESP8266WiFi.h> #include <BlynkSimpleEsp8266.h>
+
+char ssid[] = "IOT";
+char pass[] = "123456789";
+
+// Pin numbers for the relays
+int relayPins[] = {D1, D2, D3, D4, D5};
+
+void setup()
+ { 
+Serial.begin(9600); Blynk.begin(auth, ssid, pass);
+
+// Initialize relay pins as output for (int i = 0; i < 5; i++) 
+{
+pinMode(relayPins[i], OUTPUT);
+}
+}
+void loop()
+ { Blynk.run();
+}
+// Blynk virtual pin handler BLYNK_WRITE(V0) 
+{
+int pinValue = param.asInt(); // Get the state of virtual pin V0 digitalWrite(relayPins[0], pinValue); // Set relay state according to pinValue
+}
+
+BLYNK_WRITE(V1)
+
+int pinValue = param.asInt(); digitalWrite(relayPins[1], pinValue);
+}
+
+BLYNK_WRITE(V2)
+ {
+int pinValue = param.asInt(); digitalWrite(relayPins[2], pinValue);
+}
+
+BLYNK_WRITE(V3) 
+{
+int pinValue = param.asInt();
+digitalWrite(relayPins[3], pinValue);
+}
+
+BLYNK_WRITE(V4) 
+{
+int pinValue = param.asInt(); digitalWrite(relayPins[4], pinValue);
+}
